@@ -10,7 +10,7 @@ import (
 
 func main() {
 	go printRunTime()
-	emdb.InitGPIO()
+	embd.InitGPIO()
 	defer embd.CloseGPIO()
 
 	pin, err := embd.NewDigitalPin(10)
