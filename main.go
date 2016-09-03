@@ -10,15 +10,9 @@ import (
 
 func main() {
 	go printRunTime()
-	embd.InitGPIO()
-	defer embd.CloseGPIO()
-
-	embd.SetDirection(10, embd.Out)
 	for {
-		embd.DigitalWrite(10, embd.High)
-		time.Sleep(1 * time.Second)
-		embd.DigitalWrite(10, embd.Low)
-		time.Sleep(1 * time.Second)
+		embd.LEDToggle("LED0")
+		time.Sleep(250 * time.Millisecond)
 	}
 
 }
