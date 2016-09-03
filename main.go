@@ -10,9 +10,20 @@ import (
 
 func main() {
 	go printRunTime()
+	emdb.InitGPIO()
+	defer embd.CloseGPIO()
+
+	pin, err := embd.NewDigitalPin(10)
+	if err != nil {
+		fmt.Println("Something went wrong when assigning new pin")
+		fmt.Println(err)
+	}
+	pin.SetDirection(embd.Out)
 	for {
-		embd.LEDToggle("LED0")
-		time.Sleep(250 * time.Millisecond)
+		pin.Write(embd.High)
+		time.Sleep(2 * time.Second)
+		pin.Write(embd.Low)
+		time.Sleep(2 * time.Second)
 	}
 
 }
