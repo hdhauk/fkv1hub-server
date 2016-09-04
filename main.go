@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/binary"
 	"fmt"
 	"log"
 	"os/exec"
@@ -15,7 +14,7 @@ import (
 func main() {
 	go printRunTime()
 	//go blinkLED()
-	listenAndServe(1, dummyHandler)
+	listenAndRespond(1, dummyHandler)
 
 }
 
@@ -61,7 +60,7 @@ func listen(pin int) int {
 	if err != nil {
 		log.Fatal(err)
 	}
-	code, err := binary.ReadVarint(out)
+	code := strconv.Atoi(string(out))
 	if err != nil {
 		return -1
 	}
