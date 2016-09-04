@@ -14,12 +14,14 @@ func main() {
 	go printRunTime()
 	//go blinkLED()
 
-	cmd := exec.Command("sudo $HOME/Documents/C++/433Utils/RPi_utils/RFSniffer")
+	cmd := exec.Command("/home/pi/Documents/C++/433Utils/RPi_utils/RFSniffer")
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
+		fmt.Println("Failed on creating stdout")
 		log.Fatal(err)
 	}
 	if err := cmd.Start(); err != nil {
+		fmt.Println("Failed on start()")
 		log.Fatal(err)
 	}
 	fmt.Println(stdout)
