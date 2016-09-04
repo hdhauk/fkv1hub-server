@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"strconv"
 	"time"
+	"strings"
 
 	"github.com/kidoman/embd"
 	_ "github.com/kidoman/embd/host/rpi"
@@ -56,12 +57,13 @@ func listenAndRespond(pin int, handler func(int)) {
 func listen(pin int) int {
 	// For correct pinout: https://projects.drogon.net/raspberry-pi/wiringpi/pins/
 	pinStr := strconv.Itoa(pin)
-	out, err := exec.Command("/home/pi/C++/433Utils/RPi_utils/SingleSniffer ", pinStr).Output()
+	out, err := exec.Command("/home/pi/Documents/C++/433Utils/RPi_utils/SingleSniffer", pinStr).Output()
 	if err != nil {
 		log.Fatal(err)
 	}
-	code := strconv.Atoi(string(out))
+	code, err := strconv.Atoi(strings.TrimSpace(string(out)))
 	if err != nil {
+		fmt.Println(err)
 		return -1
 	}
 	return code
