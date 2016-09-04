@@ -1,9 +1,11 @@
 package main
 
 import (
+	"encoding/binary"
 	"fmt"
 	"log"
 	"os/exec"
+	"strconv"
 	"time"
 
 	"github.com/kidoman/embd"
@@ -13,12 +15,7 @@ import (
 func main() {
 	go printRunTime()
 	//go blinkLED()
-
-	out, err := exec.Command("/home/pi/C++/433Utils/RPi_utils/SingleSniffer").Output()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Recived %s\n", out)
+	listenAndServe(1, dummyHandler)
 
 }
 
@@ -47,4 +44,30 @@ func blinkLED() {
 		pin.Write(embd.Low)
 		time.Sleep(2 * time.Second)
 	}
+}
+
+func listenAndRespond(pin int, handler func(int)) {
+	for {
+		code := listen(pin)
+		go handler(code)
+		time.Sleep(500 * time.Millisecond) // Make sure signal has died out...
+	}
+}
+
+func listen(pin int) int {
+	// For correct pinout: https://projects.drogon.net/raspberry-pi/wiringpi/pins/
+	pinStr := strconv.Itoa(pin)
+	out, err := exec.Command("/home/pi/C++/433Utils/RPi_utils/SingleSniffer ", pinStr).Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+	code, err := binary.ReadVarint(out)
+	if err != nil {
+		return -1
+	}
+	return code
+}
+
+func dummyHandler(code int) {
+	fmt.Printf("Recived code: %d\n", code)
 }
