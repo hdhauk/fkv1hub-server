@@ -33,7 +33,7 @@ const (
 
 // RxCodeHandler is a function that run concurrently when a 433Mhz
 // 8-bit code is recieved. It takes the code as an input
-type RxCodeHandler func(int8)
+type RxCodeHandler func(uint)
 
 func listenAndRespond(pin int, handler RxCodeHandler) {
 	for {

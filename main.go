@@ -23,6 +23,6 @@ func printRunTime() {
 	}
 }
 
-func dummyHandler(code int8) {
+func dummyHandler(code uint) {
 	fmt.Printf("Recived code: %d\n", code)
 }
