@@ -9,6 +9,52 @@ import (
 	"time"
 )
 
+// Message defines the messages that can be sendt in the system.
+// Messages needs to bes parsed into an 8-digit code before sending, using
+// the format described below:
+// 	Message: XXYYZZZZ
+//   ______________________________________
+//	|	DeviceID		OpCode		Payload				 |
+//	| 2 digits		2digits				4 digits	 |
+//	|	XX					YY						ZZZZ			 |
+//   ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+//	DeviceID and OpCode must be greater than 0
+type Message struct {
+	DeviceID int // 2 digits
+	OpCode   int // 2 digits
+	Payload  int // 4 digits
+}
+
+// Encode returns the message as a single int, and and error if OpCode
+// or DeviceID is not set.
+// TODO: Write test for this
+func (m *Message) Encode() (int, error) {
+	if m.DeviceID <= 0 {
+		err := fmt.Errorf("DeviceID not set/or invalid. DeviceID = %d", m.DeviceID)
+		return 0, err
+	}
+	if m.OpCode <= 0 {
+		err := fmt.Errorf("OpCode not set/or invalid. OpCode = %d", m.OpCode)
+		return 0, err
+	}
+	return m.DeviceID*100000 + m.OpCode*10000 + m.Payload, nil
+}
+
+// Decode parses a raw message onto an existing Message object
+func (m *Message) Decode(rawCode int) error {
+
+}
+
+// OpCodes
+const (
+	// Temperature
+	GetTemp = 10
+	SetTemp = 11
+
+	// Humidity
+	GetHumid = 20
+)
+
 // For using labels on raspberry-pi breakout board
 const (
 	SDA    = 8
