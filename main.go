@@ -4,13 +4,12 @@ import (
 	"fmt"
 	"time"
 
-	_ "github.com/kidoman/embd/host/rpi"
+	"github.com/hdhauk/fkv1hub-server/RPi433Mhz"
 )
 
 func main() {
 	go printRunTime()
-	//go blinkLED()
-	listenAndRespond(GPIO18, dummyHandler)
+	listenAndRespond(RPi433Mhz.GPIO18, dummyHandler)
 
 }
 
@@ -23,6 +22,6 @@ func printRunTime() {
 	}
 }
 
-func dummyHandler(code uint) {
+func dummyHandler(code int) {
 	fmt.Printf("Recived code: %d\n", code)
 }
