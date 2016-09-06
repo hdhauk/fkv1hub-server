@@ -8,16 +8,16 @@ import (
 )
 
 // Message defines the messages that can be sendt in the system.
-// Messages needs to bes parsed into an 8-digit code before sending, using
-// the format described below:
-// 	Message: XXYYZZZZ
-//   ______________________________________
-//	|	DeviceID		OpCode		Payload				 |
-//	| 2 digits		2digits				4 digits	 |
-//	|	XX					YY						ZZZZ			 |
-//   ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-//	DeviceID and OpCode must be greater than 0
 type Message struct {
+	// Messages needs to bes parsed into an 8-digit code before sending, using
+	// the format described below:
+	// 	Message: XXYYZZZZ
+	//   ______________________________________
+	//	|	DeviceID		OpCode		Payload				 |
+	//	| 2 digits		2digits				4 digits	 |
+	//	|	XX					YY						ZZZZ			 |
+	//   ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+	//	DeviceID and OpCode must be greater than 0
 	DeviceID int // 2 digits
 	OpCode   int // 2 digits
 	Payload  int // 4 digits
@@ -59,28 +59,6 @@ const (
 
 	// Humidity
 	GetHumid = 20
-)
-
-// For using labels on raspberry-pi breakout board
-const (
-	SDA    = 8
-	SCL    = 9
-	GPIO04 = 7
-	GPIO17 = 0
-	GPIO27 = 2
-	GPIO22 = 3
-	MOSI   = 12
-	MISO   = 13
-	SCLK   = 14
-
-	TxD    = 15
-	RxD    = 16
-	GPIO18 = 1
-	GPIO23 = 4
-	GPIO24 = 5
-	GPIO25 = 6
-	CE0    = 10
-	CE1    = 11
 )
 
 // RxCodeHandler is a function that run concurrently when a 433Mhz

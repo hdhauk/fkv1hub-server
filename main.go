@@ -3,13 +3,17 @@ package main
 import (
 	"fmt"
 	"time"
-	//_ "github.com/kidoman/embd/host/rpi"
+
+	"github.com/hdhauk/fkv1hub-server/RPi433Mhz"
 )
 
 func main() {
 	go printRunTime()
-	//go blinkLED()
-	listenAndRespond(GPIO18, dummyHandler)
+	go func() {
+		time.Sleep(10 * time.Second)
+		RPi433Mhz.Send(RPi433Mhz.GPIO17, 404)
+	}()
+	listenAndRespond(RPi433Mhz.GPIO18, dummyHandler)
 
 }
 
