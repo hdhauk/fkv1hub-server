@@ -62,14 +62,13 @@ func Send(gpio, code int) error {
 	codeStr := fmt.Sprintf("%08d", code)
 
 	commandStr := fmt.Sprintf("%s%s", utilsPath, "CodeSend")
-	out, err := exec.Command(commandStr, codeStr, pinStr).Output()
+	_, err := exec.Command(commandStr, codeStr, pinStr).Output()
 	if err != nil {
 		log.Println(err)
 		return err
 	}
-	if string(out) != fmt.Sprintf("sending code[%s]", codeStr) {
-		log.Println(out)
-		return fmt.Errorf("Output indicates a problem.\nOutput: %s", out)
-	}
+	//TODO: Implement a check that actually listens for the signal on the reciever
+	// in order to make sure the signal is correctly sendt.
+
 	return nil
 }

@@ -9,10 +9,6 @@ import (
 
 func main() {
 	go printRunTime()
-	go func() {
-		time.Sleep(10 * time.Second)
-		RPi433Mhz.Send(RPi433Mhz.GPIO17, 404)
-	}()
 	listenAndRespond(RPi433Mhz.GPIO18, dummyHandler)
 
 }
