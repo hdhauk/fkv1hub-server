@@ -3,8 +3,7 @@ package main
 import (
 	"fmt"
 	"time"
-
-	_ "github.com/kidoman/embd/host/rpi"
+	//_ "github.com/kidoman/embd/host/rpi"
 )
 
 func main() {
@@ -23,6 +22,6 @@ func printRunTime() {
 	}
 }
 
-func dummyHandler(code uint) {
+func dummyHandler(code int) {
 	fmt.Printf("Recived code: %d\n", code)
 }

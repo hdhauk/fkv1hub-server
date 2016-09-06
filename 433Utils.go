@@ -2,11 +2,9 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os/exec"
-	"strconv"
-	"strings"
 	"time"
+
+	"github.com/hdhauk/fkv1hub-server/RPi433Mhz"
 )
 
 // Message defines the messages that can be sendt in the system.
@@ -89,30 +87,12 @@ const (
 
 // RxCodeHandler is a function that run concurrently when a 433Mhz
 // 8-bit code is recieved. It takes the code as an input
-type RxCodeHandler func(uint)
+type RxCodeHandler func(int)
 
 func listenAndRespond(pin int, handler RxCodeHandler) {
 	for {
-		code := listen(pin)
+		code := RPi433Mhz.Listen(pin)
 		go handler(code)
 		time.Sleep(500 * time.Millisecond) // Make sure signal has died out...
 	}
-}
-
-func listen(pin int) int {
-	// For correct pinout: https://projects.drogon.net/raspberry-pi/wiringpi/pins/
-	// or use constants declared above
-	pinStr := strconv.Itoa(pin)
-	// TODO: Configure this to go in a config file
-	// TODO: Test that choosing a diffrent pin works
-	out, err := exec.Command("/home/pi/Documents/C++/433Utils/RPi_utils/SingleSniffer", pinStr).Output()
-	if err != nil {
-		log.Fatal(err)
-	}
-	code, err := strconv.Atoi(strings.TrimSpace(string(out)))
-	if err != nil {
-		fmt.Println(err)
-		return -1
-	}
-	return code
 }

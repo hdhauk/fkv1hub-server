@@ -1,12 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"time"
-
-	"github.com/kidoman/embd"
-)
-
+/*
 func blinkLED() {
 	embd.InitGPIO()
 	defer embd.CloseGPIO()
@@ -24,3 +18,4 @@ func blinkLED() {
 		time.Sleep(2 * time.Second)
 	}
 }
+*/
