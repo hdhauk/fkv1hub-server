@@ -42,8 +42,8 @@ func (m *Message) Encode() (int, error) {
 // TODO: Write a test for this
 func (m *Message) Decode(rawCode int) error {
 	m.Payload = rawCode % 10000
-	m.OpCode = ((rawCode - m.Payload) % 100000) / 1000
-	m.DeviceID = ((rawCode - m.Payload - m.OpCode) % 100000000) / 100000
+	m.OpCode = ((rawCode - m.Payload) % 1000000) / 10000
+	m.DeviceID = ((rawCode - m.Payload - m.OpCode) % 100000000) / 1000000
 	if m.OpCode <= 0 {
 		return fmt.Errorf("Cannot parse OpCode. Opcode =  %d", m.OpCode)
 	}
