@@ -25,7 +25,6 @@ type Message struct {
 
 // Encode returns the message as a single int, and and error if OpCode
 // or DeviceID is not set.
-// TODO: Write test for this
 func (m *Message) Encode() (int, error) {
 	if m.DeviceID <= 0 {
 		err := fmt.Errorf("DeviceID not set/or invalid. DeviceID = %d", m.DeviceID)
@@ -39,7 +38,6 @@ func (m *Message) Encode() (int, error) {
 }
 
 // Decode parses a raw message onto an existing Message object
-// TODO: Write a test for this
 func (m *Message) Decode(rawCode int) error {
 	m.Payload = rawCode % 10000
 	m.OpCode = ((rawCode - m.Payload) % 1000000) / 10000

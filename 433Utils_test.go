@@ -31,6 +31,10 @@ func TestDecode(t *testing.T) {
 	}{
 		{11223333, Message{11, 22, 3333}},
 		{22331234, Message{22, 33, 1234}},
+		{1000000, Message{1, 00, 0}},
+		{0, Message{0, 0, 0}},
+		{1, Message{0, 0, 1}},
+		{99000000, Message{99, 0, 0}},
 	}
 
 	for _, test := range tests {
