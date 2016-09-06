@@ -1,3 +1,5 @@
+// Package RPi433Mhz is a crude go wrapper for a modded version of
+//  ninjablocks 433Utils (https://github.com/ninjablocks/433Utils)
 package RPi433Mhz
 
 import (
@@ -7,6 +9,10 @@ import (
 	"strconv"
 	"strings"
 )
+
+// Location of RPi_utils
+// TODO: Configure this to go in a config file
+const utilsPath = "/home/pi/Documents/C++/433Utils/RPi_utils/"
 
 // Breakout board GPIO pins
 const (
@@ -33,10 +39,6 @@ const (
 	CE0    = 10
 	CE1    = 11
 )
-
-// Location of RPi_utils
-// TODO: Configure this to go in a config file
-const utilsPath = "/home/pi/Documents/C++/433Utils/RPi_utils/"
 
 // Listen for 433Mhz codes on specified GPIO-pin
 func Listen(gpio int) int {
