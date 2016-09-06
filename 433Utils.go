@@ -35,7 +35,7 @@ func (m *Message) Encode() (int, error) {
 		err := fmt.Errorf("OpCode not set/or invalid. OpCode = %d", m.OpCode)
 		return 0, err
 	}
-	return m.DeviceID*100000 + m.OpCode*10000 + m.Payload, nil
+	return m.DeviceID*1000000 + m.OpCode*10000 + m.Payload, nil
 }
 
 // Decode parses a raw message onto an existing Message object
