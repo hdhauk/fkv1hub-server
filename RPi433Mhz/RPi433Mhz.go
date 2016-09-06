@@ -1,5 +1,6 @@
 // Package RPi433Mhz is a crude go wrapper for a modded version of
-//  ninjablocks 433Utils (https://github.com/ninjablocks/433Utils)
+// ninjablocks 433Utils (https://github.com/ninjablocks/433Utils)
+// Modded version: https://github.com/hdhauk/433Utils
 package RPi433Mhz
 
 import (
