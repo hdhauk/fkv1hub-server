@@ -17,7 +17,7 @@ A 16-bit identifier for the specific button. Each button will cycle through 4 di
 **ReceiverID**:<br>
 4 bits unique for calls to a specific device.
 
-_ \* The two first digits in the SenderID might be omitted if they in binary form corresponds to 00 (ie. 0b0011/0d3 -> 0b11)_
+_\* The two first digits in the SenderID might be omitted if they in binary form corresponds to 00 (ie. 0b0011/0d3 -> 0b11)_
 
 ## Example Codes
 
