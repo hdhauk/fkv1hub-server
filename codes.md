@@ -12,7 +12,7 @@ The CoTech remote switch set are communication using simple
 ID of the specific remote control. 4 bits\*.
 <br>
 **Payload**: <br>
-A 16-bit identifier for the specific button. Each button will cycle through 4 different codes. Some pattern probably identifies if the call is either a "ON or "OFF"-call, but you don't really need to know this in order to emulate a call ass long as you obtain all the codes.
+A 16-bit identifier for the specific button. Each button will cycle through 4 different codes. Some pattern probably identifies if the call is either a "ON or "OFF"-call, but you don't really need to know this in order to emulate a call as long as you obtain all the codes.
 <br>
 **ReceiverID**:<br>
 4 bits unique for calls to a specific device.
