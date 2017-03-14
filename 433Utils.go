@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 	"time"
-
-	"github.com/hdhauk/fkv1hub-server/RPi433Mhz"
 )
 
 // Message defines the messages that can be sendt in the system.
