@@ -4,13 +4,24 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hdhauk/fkv1hub-server/RPi433Mhz"
+	"github.com/hdhauk/fkv1hub-server/rpi433mhz"
 )
 
 func main() {
-	go printRunTime()
-	listenAndRespond(RPi433Mhz.GPIO18, dummyHandler)
-
+	tx := make(chan int)
+	rx := make(chan int)
+	cfg := rpi433mhz.Config{
+		TxCh: tx,
+		RxCh: rx,
+	}
+	r := rpi433mhz.NewRCSwitch()
+	r.Init(cfg)
+	for {
+		select {
+		case i := <-rx:
+			fmt.Println(i)
+		}
+	}
 }
 
 func printRunTime() {
